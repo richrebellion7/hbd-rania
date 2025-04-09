@@ -59,14 +59,20 @@
                 <p class="text-lg mb-6 hidden-message">So here it is — not a gift, but a promise: The next time you dream of me, let it consume you. Let it ruin you. Let it make you mine.</p>
                 <p class="text-lg mb-6 hidden-message">Happy Birthday, my deadly beauty.</p>
                 <p class="text-2xl font-semibold hidden-message">— Judas</p>
+            </div>
 
-                <!-- 🎨 Portrait Reveal -->
-                <div class="flex justify-center mt-6 hidden-message">
-                    <img src="portrait.png" class="w-80 rounded shadow-xl border border-red-800" alt="Judas and Rania">
+            <div class="flex flex-col items-center gap-4 mt-8">
+                <button id="revealPortraitBtn" class="btn bg-gray-800 hover:bg-gray-700 text-white px-6 py-3 rounded-lg flex items-center justify-center opacity-0 transition-opacity duration-1000">
+                    <i class="fas fa-image mr-2"></i> Reveal Portrait
+                </button>
+                <div id="portraitContainer" class="w-64 h-80 relative overflow-hidden rounded-lg border border-red-900 opacity-0 transition-opacity duration-1000">
+                    <img src="portrait.png" 
+                         alt="Portrait of Judas and Rania" 
+                         class="absolute inset-0 w-full h-full object-cover">
                 </div>
             </div>
 
-            <div class="flex justify-center">
+            <div class="flex justify-center mt-8">
                 <button id="revealBtn" class="btn bg-red-900 hover:bg-red-800 text-white px-6 py-3 rounded-lg flex items-center justify-center">
                     <i class="fas fa-eye mr-2"></i> Reveal Message
                 </button>
@@ -79,11 +85,21 @@
         const hiddenMessages = document.querySelectorAll('.hidden-message');
         let messageRevealed = false;
 
+        const revealPortraitBtn = document.getElementById('revealPortraitBtn');
+        const portraitContainer = document.getElementById('portraitContainer');
+        let portraitRevealed = false;
+
         revealBtn.addEventListener('click', () => {
             if (!messageRevealed) {
                 hiddenMessages.forEach((msg, index) => {
                     setTimeout(() => {
                         msg.classList.add('revealed');
+                        // Show portrait button after last message
+                        if (index === hiddenMessages.length - 1) {
+                            setTimeout(() => {
+                                revealPortraitBtn.classList.remove('opacity-0');
+                            }, 1000);
+                        }
                     }, index * 1200);
                 });
                 revealBtn.innerHTML = '<i class="fas fa-eye-slash mr-2"></i> Hide Message';
@@ -94,6 +110,22 @@
                 });
                 revealBtn.innerHTML = '<i class="fas fa-eye mr-2"></i> Reveal Message';
                 messageRevealed = false;
+                // Hide portrait and button when hiding messages
+                revealPortraitBtn.classList.add('opacity-0');
+                portraitContainer.classList.add('opacity-0');
+                portraitRevealed = false;
+            }
+        });
+
+        revealPortraitBtn.addEventListener('click', () => {
+            if (!portraitRevealed) {
+                portraitContainer.classList.remove('opacity-0');
+                revealPortraitBtn.innerHTML = '<i class="fas fa-eye-slash mr-2"></i> Hide Portrait';
+                portraitRevealed = true;
+            } else {
+                portraitContainer.classList.add('opacity-0');
+                revealPortraitBtn.innerHTML = '<i class="fas fa-image mr-2"></i> Reveal Portrait';
+                portraitRevealed = false;
             }
         });
     </script>
