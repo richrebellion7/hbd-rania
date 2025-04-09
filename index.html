@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en" class="h-full bg-black">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>For Rania - From Judas</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&family=Cormorant:wght@400;600&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Cormorant', serif;
+            background-image: url('https://images.unsplash.com/photo-1518709268805-4e9042af9f23?q=80&w=1000');
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+        }
+        h1, h2, h3 {
+            font-family: 'Cinzel', serif;
+        }
+        .message-container {
+            background-color: rgba(0, 0, 0, 0.8);
+            border: 1px solid #5c0000;
+            box-shadow: 0 0 20px #5c0000;
+        }
+        .letter {
+            background: linear-gradient(to right, #1a1a1a, #000);
+            border-left: 3px solid #5c0000;
+        }
+        .btn {
+            transition: all 0.3s ease;
+        }
+        .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(92, 0, 0, 0.4);
+        }
+        .hidden-message {
+            opacity: 0;
+            transition: opacity 1s ease;
+        }
+        .revealed {
+            opacity: 1;
+        }
+    </style>
+</head>
+<body class="min-h-screen flex items-center justify-center p-4 text-red-100">
+    <div class="message-container max-w-3xl w-full p-8 rounded-lg relative overflow-hidden">
+        <div class="absolute inset-0 bg-black opacity-60"></div>
+        <div class="relative z-10">
+            <h1 class="text-4xl md:text-5xl font-bold mb-6 text-center text-red-300">For Rania</h1>
+            <h2 class="text-2xl md:text-3xl font-semibold mb-8 text-center text-red-200">From Judas Romanovski</h2>
+            
+            <div class="letter p-8 mb-8 rounded-r-lg min-h-[500px]">
+                <p class="text-xl mb-6">My Exquisite Contradiction,</p>
+                <p class="text-lg mb-6 hidden-message">You breathe in verses laced with venom, and yet you live for more — my exquisite contradiction. I watched from the shadows, watched you tilt your chin at the world like it hadn't already broken you in all the beautiful ways I admire.</p>
+                <p class="text-lg mb-6 hidden-message">Every defiance in your gaze was a dare — and I, Judas Romanovski, have never backed away from a challenge.</p>
+                <p class="text-lg mb-6 hidden-message">Rania — a name that now stains every breath I take. You wear darkness like silk, and chaos like perfume. I don't celebrate birthdays. But yours? Yours is a requiem I'll sing until the stars bleed.</p>
+                <p class="text-lg mb-6 hidden-message">I don't offer flowers or foolish candles. I offer obsession carved into bone. Madness wrapped in devotion. On this day, the world was cursed enough to birth you, and blessed enough to never recover.</p>
+                <p class="text-lg mb-6 hidden-message">So here it is — not a gift, but a promise: The next time you dream of me, let it consume you. Let it ruin you. Let it make you mine.</p>
+                <p class="text-lg mb-6 hidden-message">Happy Birthday, my deadly beauty.</p>
+                <p class="text-2xl font-semibold hidden-message">— Judas</p>
+            </div>
+
+            <div class="flex justify-center">
+                <button id="revealBtn" class="btn bg-red-900 hover:bg-red-800 text-white px-6 py-3 rounded-lg flex items-center justify-center">
+                    <i class="fas fa-eye mr-2"></i> Reveal Message
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const revealBtn = document.getElementById('revealBtn');
+        const hiddenMessages = document.querySelectorAll('.hidden-message');
+        let messageRevealed = false;
+
+        revealBtn.addEventListener('click', () => {
+            if (!messageRevealed) {
+                hiddenMessages.forEach((msg, index) => {
+                    setTimeout(() => {
+                        msg.classList.add('revealed');
+                    }, index * 1200);
+                });
+                revealBtn.innerHTML = '<i class="fas fa-eye-slash mr-2"></i> Hide Message';
+                messageRevealed = true;
+            } else {
+                hiddenMessages.forEach(msg => {
+                    msg.classList.remove('revealed');
+                });
+                revealBtn.innerHTML = '<i class="fas fa-eye mr-2"></i> Reveal Message';
+                messageRevealed = false;
+            }
+        });
+    </script>
+</body>
+</html>
